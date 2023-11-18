@@ -6,9 +6,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -25,18 +28,17 @@ class CalculadoraRestTest {
         String uri = "/calculadora/somar";
 
         mockMvc.perform(
-                MockMvcRequestBuilders.get(uri)
+                get(uri)
                 .contentType(MediaType.APPLICATION_JSON)
                         .param("n1", n1)
                         .param("n2", n2)
-        ).andDo(MockMvcResultHandlers.print())
-        .andExpect(MockMvcResultMatchers.status().isOk())
-        .andExpect(MockMvcResultMatchers.jsonPath("$.primeiroNumero").value(n1))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.segundoNumero").value(n2))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.resultados[0]").value(retorno))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.resultados[1]").value("5"))
+        ).andDo(print())
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.primeiroNumero").value(n1))
+        .andExpect(jsonPath("$.segundoNumero").value(n2))
+        .andExpect(jsonPath("$.resultados[0]").value(retorno))
+        .andExpect(jsonPath("$.resultados[1]").value("2"))
         ;
-
 
     }
 

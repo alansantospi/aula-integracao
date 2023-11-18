@@ -23,9 +23,6 @@ public class CalculadoraRest {
     @Autowired
     private CalcService calcService;
 
-//    @Autowired
-//    private Calc calc;
-
     @GetMapping("/teste")
     public ResponseEntity<?> teste() {
         return ResponseEntity.status(HttpStatus.OK).build();
